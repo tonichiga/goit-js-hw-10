@@ -1,5 +1,6 @@
 import products from "./menu.json";
 import { template } from "./template.js";
+import templateList from "./template/template-list.hbs";
 
 const containerRef = document.querySelector(".container");
 const bodyRef = document.querySelector("body");
@@ -42,12 +43,19 @@ bodyRef.classList.add(`${theme}`);
 bodyRef.append(wrapperRef);
 console.log(wrapperRef);
 
-const order = (products) =>
-  products.map(({ name, id, description, image, price, ingredients }) => {
-    wrapperRef.insertAdjacentHTML(
-      "beforeend",
-      template(name, id, description, image, price, ingredients)
-    );
-  });
+// ВАРИАНТ ДОБАВЛЕНИЯ РАЗМЕТКИ - 1
 
-order(products);
+// const order = (products) =>
+//   products.map(({ name, id, description, image, price, ingredients }) => {
+//     wrapperRef.insertAdjacentHTML(
+//       "beforeend",
+//       template(name, id, description, image, price, ingredients)
+//     );
+//   });
+
+// order(products);
+
+// ВАРИАНТ ДОБАВЛЕНИЯ РАЗМЕТКИ - 2 (ЧЕРЕЗ ШАБЛОНИЗАТОР)
+
+const markup = templateList(products);
+wrapperRef.insertAdjacentHTML("beforeend", markup);
